@@ -44,8 +44,7 @@
     <IpaPackageName>
     </IpaPackageName>
     <DefineConstants>MOBILE</DefineConstants>
-    <CodesignProvision>
-    </CodesignProvision>
+    <CodesignProvision>744071e2-b802-4db0-aefd-04618b30d473</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <Optimize>true</Optimize>
@@ -75,6 +74,7 @@
     <MtouchDebug>true</MtouchDebug>
     <IpaPackageName>
     </IpaPackageName>
+    <CodesignProvision>8169a7f8-d8ac-4d01-b522-79462fda5286</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -226,9 +226,6 @@
     <Reference Include="FormsToolkit">
       <HintPath>..\packages\FormsToolkit.1.1.14\lib\Xamarin.iOS10\FormsToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="Calabash">
-      <HintPath>..\packages\Xamarin.TestCloud.Agent.0.19.0\lib\Xamarin.iOS10\Calabash.dll</HintPath>
-    </Reference>
     <Reference Include="Plugin.Messaging.Abstractions">
       <HintPath>..\packages\Xam.Plugins.Messaging.3.2.1\lib\Xamarin.iOS10\Plugin.Messaging.Abstractions.dll</HintPath>
     </Reference>
@@ -282,6 +279,9 @@
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Messaging.iOS">
       <HintPath>..\Components\azure-messaging-1.1.5.6\lib\ios-unified\Microsoft.WindowsAzure.Messaging.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Calabash">
+      <HintPath>..\packages\Xamarin.TestCloud.Agent.0.19.2\lib\Xamarin.iOS10\Calabash.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
