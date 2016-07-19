@@ -35,7 +35,7 @@ namespace XamarinEvolve.UITests
                 app = ConfigureApp
 					.iOS
 					.PreferIdeSettings()
-					.InstalledApp("com.arteksoftware.evolve")
+					//.InstalledApp("com.arteksoftware.evolve")
                     .StartApp(Xamarin.UITest.Configuration.AppDataMode.Clear);
             }
 
