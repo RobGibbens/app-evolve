@@ -15,6 +15,7 @@ namespace XamarinEvolve.Clients.UI
 
         public EventsPage()
         {
+			
             InitializeComponent();
             BindingContext = new EventsViewModel(Navigation);
 
@@ -47,6 +48,7 @@ namespace XamarinEvolve.Clients.UI
             
         protected override void OnAppearing()
         {
+			Xamarin.Insights.Track("EventsPage");
             base.OnAppearing();
             if (ViewModel.Events.Count == 0)
                 ViewModel.LoadEventsCommand.Execute(false);

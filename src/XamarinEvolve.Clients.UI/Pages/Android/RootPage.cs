@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using XamarinEvolve.Clients.Portable;
 using FormsToolkit;
 using XamarinEvolve.DataStore.Abstractions;
+using XLabs.Platform.Device;
 
 namespace XamarinEvolve.Clients.UI
 {
@@ -14,12 +15,14 @@ namespace XamarinEvolve.Clients.UI
         Dictionary<int, EvolveNavigationPage> pages;
         DeepLinkPage page;
         bool isRunning = false;
-        public RootPageAndroid()
+		IDevice device;
+        public RootPageAndroid(IDevice device)
         {
+			this.device = device;
             pages = new Dictionary<int, EvolveNavigationPage>();
             Master = new MenuPage(this);
 
-            pages.Add(0, new EvolveNavigationPage(new FeedPage()));
+            pages.Add(0, new EvolveNavigationPage(new FeedPage(device)));
 
             Detail = pages[0];
             MessagingService.Current.Subscribe<DeepLinkPage>("DeepLinkPage", async (m, p) =>
@@ -42,10 +45,10 @@ namespace XamarinEvolve.Clients.UI
                 switch (menuId)
                 {
                     case (int)AppPage.Feed: //Feed
-                        pages.Add(menuId, new EvolveNavigationPage(new FeedPage()));
+                        pages.Add(menuId, new EvolveNavigationPage(new FeedPage(device)));
                         break;
                     case (int)AppPage.Sessions://sessions
-                        pages.Add(menuId, new EvolveNavigationPage(new SessionsPage()));
+                        pages.Add(menuId, new EvolveNavigationPage(new SessionsPage(device)));
                         break;
                     case (int)AppPage.Events://events
                         pages.Add(menuId, new EvolveNavigationPage(new EventsPage()));
@@ -119,7 +122,7 @@ namespace XamarinEvolve.Clients.UI
                     var session = await DependencyService.Get<ISessionStore>().GetAppIndexSession(id);
                     if (session == null)
                         break;
-                    await Detail.Navigation.PushAsync(new SessionDetailsPage(session));
+                    await Detail.Navigation.PushAsync(new SessionDetailsPage(session, device));
                     break;
             }
 

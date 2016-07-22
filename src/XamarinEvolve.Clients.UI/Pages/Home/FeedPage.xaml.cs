@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using XamarinEvolve.Clients.Portable;
 using FormsToolkit;
 using XamarinEvolve.DataObjects;
+using XLabs.Platform.Device;
 
 namespace XamarinEvolve.Clients.UI
 {
@@ -14,7 +15,7 @@ namespace XamarinEvolve.Clients.UI
         FeedViewModel vm;
         DateTime favoritesTime;
         string loggedIn;
-        public FeedPage()
+        public FeedPage(IDevice device)
         {
             InitializeComponent();
             loggedIn = Settings.Current.Email;
@@ -49,7 +50,7 @@ namespace XamarinEvolve.Clients.UI
                     var session = ListViewSessions.SelectedItem as Session;
                     if(session == null)
                         return;
-                    var sessionDetails = new SessionDetailsPage(session);
+                    var sessionDetails = new SessionDetailsPage(session, device);
 
                     App.Logger.TrackPage(AppPage.Session.ToString(), session.Title);
                     await NavigationService.PushAsync(Navigation, sessionDetails);
@@ -68,7 +69,9 @@ namespace XamarinEvolve.Clients.UI
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
+			Xamarin.Insights.Track("FeedPage");
+
+			base.OnAppearing();
 
             UpdatePage();
 

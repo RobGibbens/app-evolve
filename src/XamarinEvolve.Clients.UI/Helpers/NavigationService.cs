@@ -3,6 +3,7 @@ using Xamarin.Forms;
 
 namespace XamarinEvolve.Clients.UI
 {
+	
     /// <summary>
     /// Helper navigation service to use so we don't push multiple pages at the same time.
     /// </summary>

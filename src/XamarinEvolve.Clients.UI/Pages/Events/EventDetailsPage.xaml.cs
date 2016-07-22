@@ -52,7 +52,9 @@ namespace XamarinEvolve.Clients.UI
 
         protected override void OnAppearing()
         {
-            base.OnAppearing(); 
+			Xamarin.Insights.Track("EventDetailsPage");
+
+			base.OnAppearing(); 
 
             ViewModel.LoadEventDetailsCommand.Execute(null);
 

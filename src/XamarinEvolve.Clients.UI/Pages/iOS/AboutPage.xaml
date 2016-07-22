@@ -22,7 +22,12 @@
                 Spacing="{DynamicResource CardSpacing}"
                 Padding="{DynamicResource CardPadding}">
 
-             
+             <Label Text="{Binding DeviceName}" />
+				<Label Text="{Binding DeviceFirmwareVersion}" />
+             <Label Text="{Binding DeviceHardwareVersion}" />
+				<Label Text="{Binding DeviceManufacturer}" />
+
+				
                <local:CardView>
                      <StackLayout Spacing="0">
                         <local:LabelSection Text="My Account"/>

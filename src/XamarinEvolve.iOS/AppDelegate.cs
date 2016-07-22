@@ -19,6 +19,7 @@ using XamarinEvolve.DataStore.Abstractions;
 using HockeyApp;
 using System.Threading.Tasks;
 using Google.AppIndexing;
+using XLabs.Platform.Device;
 
 namespace XamarinEvolve.iOS
 {
@@ -38,7 +39,7 @@ namespace XamarinEvolve.iOS
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            
+
             var tint = UIColor.FromRGB(118, 53, 235);
             UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(250, 250, 250); //bar background
             UINavigationBar.Appearance.TintColor = tint; //Tint color of button items
@@ -54,6 +55,7 @@ namespace XamarinEvolve.iOS
             UIView.AppearanceWhenContainedIn(typeof(UIAlertController)).TintColor = tint;
             UIView.AppearanceWhenContainedIn(typeof(UIActivityViewController)).TintColor = tint;
             UIView.AppearanceWhenContainedIn(typeof(SLComposeViewController)).TintColor = tint;
+			Insights.Initialize(ApiKeys.InsightsKey);
 
             #if !ENABLE_TEST_CLOUD
             if (!string.IsNullOrWhiteSpace(ApiKeys.HockeyAppiOS) && ApiKeys.HockeyAppiOS != nameof(ApiKeys.HockeyAppiOS))
@@ -111,7 +113,7 @@ namespace XamarinEvolve.iOS
             SelectedTabPageRenderer.Initialize();
             TextViewValue1Renderer.Init();
             PullToRefreshLayoutRenderer.Init();
-            LoadApplication(new App());
+            LoadApplication(new App(XLabs.Platform.Device.AppleDevice.CurrentDevice));
 
 
            

@@ -2,6 +2,7 @@
 using XamarinEvolve.DataObjects;
 using XamarinEvolve.Clients.Portable;
 using System.Windows.Input;
+using XLabs.Platform.Device;
 
 namespace XamarinEvolve.Clients.UI
 {
@@ -9,8 +10,10 @@ namespace XamarinEvolve.Clients.UI
     public class SessionCell: ViewCell
     {
         readonly INavigation navigation;
-        public SessionCell (INavigation navigation = null)
+		IDevice device;
+        public SessionCell (IDevice device, INavigation navigation = null)
         {
+			this.device = device;
             Height = 120;
             View = new SessionCellView ();
             this.navigation = navigation;
@@ -27,7 +30,7 @@ namespace XamarinEvolve.Clients.UI
                 return;
             
             App.Logger.TrackPage(AppPage.Session.ToString(), session.Title);
-            await NavigationService.PushAsync(navigation, new SessionDetailsPage(session));
+            await NavigationService.PushAsync(navigation, new SessionDetailsPage(session, device));
         }
     }
 

@@ -4,6 +4,7 @@ using XamarinEvolve.Clients.Portable;
 using FormsToolkit;
 using System.Collections.ObjectModel;
 using MenuItem = XamarinEvolve.Clients.Portable.MenuItem;
+using XLabs.Platform.Device;
 
 namespace XamarinEvolve.Clients.UI
 {
@@ -12,8 +13,10 @@ namespace XamarinEvolve.Clients.UI
         Dictionary<AppPage, Page> pages;
         MenuPageUWP menu;
         public static bool IsDesktop { get; set; }
-        public RootPageWindows()
+		IDevice device;
+        public RootPageWindows(IDevice device)
         {
+			this.device = device;
             //MasterBehavior = MasterBehavior.Popover;
             pages = new Dictionary<AppPage, Page>();
 
@@ -64,10 +67,10 @@ namespace XamarinEvolve.Clients.UI
                 switch (menuId)
                 {
                     case AppPage.Feed: //Feed
-                        pages.Add(menuId, new EvolveNavigationPage(new FeedPage()));
+                        pages.Add(menuId, new EvolveNavigationPage(new FeedPage(device)));
                         break;
                     case AppPage.Sessions://sessions
-                        pages.Add(menuId, new EvolveNavigationPage(new SessionsPage()));
+                        pages.Add(menuId, new EvolveNavigationPage(new SessionsPage(device)));
                         break;
                     case AppPage.Events://events
                         pages.Add(menuId, new EvolveNavigationPage(new EventsPage()));

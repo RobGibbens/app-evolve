@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using XamarinEvolve.Clients.Portable;
 using FormsToolkit;
+using XLabs.Platform.Device;
 
 namespace XamarinEvolve.Clients.UI
 {
@@ -11,10 +12,10 @@ namespace XamarinEvolve.Clients.UI
     {
         AboutViewModel vm;
         IPushNotifications push;
-        public AboutPage()
+        public AboutPage(IDevice device)
         {
             InitializeComponent();
-            BindingContext = vm = new AboutViewModel();
+            BindingContext = vm = new AboutViewModel(device);
             push = DependencyService.Get<IPushNotifications>();
             var adjust = Device.OS != TargetPlatform.Android ? 1 : -vm.AboutItems.Count + 1;
             ListViewAbout.HeightRequest = (vm.AboutItems.Count * ListViewAbout.RowHeight) - adjust;

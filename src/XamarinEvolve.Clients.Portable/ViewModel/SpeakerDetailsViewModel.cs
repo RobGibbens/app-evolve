@@ -27,6 +27,11 @@ namespace XamarinEvolve.Clients.Portable
         public SpeakerDetailsViewModel(Speaker speaker, string sessionId) : base()
         {
             Speaker = speaker;
+			if (sessionId == "1" && speaker.FullName == "Breck Williams")
+			{
+				DemoHelper.ShouldThrowException = true;
+			}
+
             this.sessionId = sessionId;
             if (!string.IsNullOrWhiteSpace(speaker.CompanyWebsiteUrl))
             {

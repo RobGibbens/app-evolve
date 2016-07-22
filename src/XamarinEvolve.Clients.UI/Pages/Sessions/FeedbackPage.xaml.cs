@@ -28,6 +28,13 @@ namespace XamarinEvolve.Clients.UI
                 });
         }
 
+		protected override void OnAppearing()
+		{
+			Xamarin.Insights.Track("FeedbackPage");
+
+			base.OnAppearing();
+		}
+
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

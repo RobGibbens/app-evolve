@@ -104,7 +104,7 @@ namespace XamarinEvolve.Droid
             InitializeHockeyApp ();
 #endif
 
-            LoadApplication (new App ());
+            LoadApplication (new App (XLabs.Platform.Device.AndroidDevice.CurrentDevice));
 
             var gpsAvailable = IsPlayServicesAvailable ();
             Settings.Current.PushNotificationsEnabled = gpsAvailable;

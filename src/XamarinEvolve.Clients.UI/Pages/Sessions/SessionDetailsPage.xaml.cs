@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using XamarinEvolve.DataObjects;
 using XamarinEvolve.Clients.Portable;
 using FormsToolkit;
+using XLabs.Platform.Device;
 
 namespace XamarinEvolve.Clients.UI
 {
@@ -12,7 +13,7 @@ namespace XamarinEvolve.Clients.UI
     {
         SessionDetailsViewModel ViewModel => vm ?? (vm = BindingContext as SessionDetailsViewModel);
         SessionDetailsViewModel vm;
-        public SessionDetailsPage(Session session)
+        public SessionDetailsPage(Session session, IDevice device)
         {
             InitializeComponent();
 
@@ -30,7 +31,7 @@ namespace XamarinEvolve.Clients.UI
                     if(speaker == null)
                         return;
                     
-                    var speakerDetails = new SpeakerDetailsPage(vm.Session.Id);
+                    var speakerDetails = new SpeakerDetailsPage(vm.Session.Id, device);
 
                     speakerDetails.Speaker = speaker;
                     App.Logger.TrackPage(AppPage.Speaker.ToString(), speaker.FullName);
@@ -39,8 +40,28 @@ namespace XamarinEvolve.Clients.UI
                 };
 
 
-            ButtonRate.Clicked += async (sender, e) => 
-            {
+			ButtonRate.Clicked += async (sender, e) =>
+			{
+				var title = this.ViewModel?.Session?.Title;
+				Xamarin.Insights.Track("Rate Session", "SessionTitle", title);
+
+				if (DemoHelper.ShouldThrowException 
+				    //&& (device.Name == "iPhone 5S GSM" || device.Name == "iPhone 6") 
+				    //&& device.FirmwareVersion == "9.3"
+				   )
+				{
+					try
+					{
+						throw new NotSupportedException();
+					}
+					catch (Exception ex)
+					{
+						Xamarin.Insights.Report(ex);
+						throw;
+					}
+
+				}
+
                     if(!Settings.Current.IsLoggedIn)
                     {
                         DependencyService.Get<ILogger>().TrackPage(AppPage.Login.ToString(), "Feedback");
@@ -49,7 +70,7 @@ namespace XamarinEvolve.Clients.UI
                     }
                     await NavigationService.PushModalAsync(Navigation, new EvolveNavigationPage(new FeedbackPage(ViewModel.Session)));
             };
-            BindingContext = new SessionDetailsViewModel(Navigation, session); 
+            BindingContext = new SessionDetailsViewModel(Navigation, session, device); 
             ViewModel.LoadSessionCommand.Execute(null);
 
         }
@@ -74,7 +95,12 @@ namespace XamarinEvolve.Clients.UI
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
+			var title = this.ViewModel?.Session?.Title;
+			Xamarin.Insights.Track("SessionDetailsPage", new Dictionary<string, string> {
+				{"SessionTitle", title }
+			});
+
+			base.OnAppearing();
             MainScroll.Scrolled += MainScroll_Scrolled;
             ListViewSpeakers.ItemTapped += ListViewTapped;
 

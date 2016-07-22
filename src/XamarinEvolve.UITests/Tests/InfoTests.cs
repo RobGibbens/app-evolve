@@ -24,6 +24,8 @@ namespace XamarinEvolve.UITests
             {
                 new FeedPage()
                     .NavigateTo("Info");
+				
+				app.Screenshot("Info page");
 
                 new InfoPage()
                     .NavigateToInfoItem("Sponsors");

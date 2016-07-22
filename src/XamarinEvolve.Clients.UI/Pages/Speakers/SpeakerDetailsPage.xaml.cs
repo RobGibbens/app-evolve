@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using XamarinEvolve.DataObjects;
 using XamarinEvolve.Clients.Portable;
 using FormsToolkit;
+using XLabs.Platform.Device;
 
 namespace XamarinEvolve.Clients.UI
 {
@@ -13,7 +14,7 @@ namespace XamarinEvolve.Clients.UI
         SpeakerDetailsViewModel ViewModel => vm ?? (vm = BindingContext as SpeakerDetailsViewModel);
         SpeakerDetailsViewModel vm;
         string sessionId;
-        public SpeakerDetailsPage(string sessionId)
+        public SpeakerDetailsPage(string sessionId, IDevice device)
         {
             this.sessionId = sessionId;
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace XamarinEvolve.Clients.UI
                     if(session == null)
                         return;
 
-                    var sessionDetails = new SessionDetailsPage(session);
+                    var sessionDetails = new SessionDetailsPage(session, device);
 
                     App.Logger.TrackPage(AppPage.Session.ToString(), session.Title);
                     await NavigationService.PushAsync(Navigation, sessionDetails);
@@ -73,8 +74,10 @@ namespace XamarinEvolve.Clients.UI
             
         protected override async void OnAppearing()
         {
-           
-            base.OnAppearing();
+			var name = this.ViewModel?.Speaker?.FullName;
+			Xamarin.Insights.Track("SpeakerDetailsPage", "SpeakerName", name);
+
+			base.OnAppearing();
 
             MainScroll.Scrolled += MainScroll_Scrolled;
 

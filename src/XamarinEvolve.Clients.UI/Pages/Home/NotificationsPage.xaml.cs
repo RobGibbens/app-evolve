@@ -18,7 +18,9 @@ namespace XamarinEvolve.Clients.UI
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
+			Xamarin.Insights.Track("NotificationsPage");
+
+			base.OnAppearing();
             if (vm.Notifications.Count == 0)
                 vm.LoadNotificationsCommand.Execute(false);
         }

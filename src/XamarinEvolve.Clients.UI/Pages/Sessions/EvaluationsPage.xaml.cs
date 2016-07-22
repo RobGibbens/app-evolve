@@ -35,7 +35,9 @@ namespace XamarinEvolve.Clients.UI
 
         protected override void OnAppearing ()
         {
-            base.OnAppearing ();
+			Xamarin.Insights.Track("EvaluationsPage");
+
+			base.OnAppearing ();
 
             if (Device.OS == TargetPlatform.Android)
                 MessagingService.Current.Subscribe ("eval_finished", (d) => UpdatePage ());

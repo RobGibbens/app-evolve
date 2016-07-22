@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using XamarinEvolve.DataObjects;
 using XamarinEvolve.Clients.Portable;
+using XLabs.Platform.Device;
 
 namespace XamarinEvolve.Clients.UI
 {
@@ -10,8 +11,10 @@ namespace XamarinEvolve.Clients.UI
     {
         readonly INavigation navigation;
         string sessionId;
-        public SpeakerCell (string sessionId, INavigation navigation = null)
+		IDevice device;
+        public SpeakerCell (string sessionId, IDevice device, INavigation navigation = null)
         {
+			this.device = device;
             this.sessionId = sessionId;
             Height = 60;
             View = new SpeakerCellView ();
@@ -31,7 +34,7 @@ namespace XamarinEvolve.Clients.UI
 
             App.Logger.TrackPage(AppPage.Speaker.ToString(), speaker.FullName);
 
-            await navigation.PushAsync(new SpeakerDetailsPage(sessionId)
+            await navigation.PushAsync(new SpeakerDetailsPage(sessionId, device)
                 {
                     Speaker = speaker
                 });

@@ -15,6 +15,7 @@ namespace XamarinEvolve.Clients.Portable
         public const string GoogleSenderId ="GoogleSenderId";
         public const string AzureHubName = "AzureHubName";
         public const string AzureListenConneciton = "AzureListenConneciton";
+		public const string InsightsKey = "3ad441716874fd3bf0fc5fad1f2322b3f8f7243b";
     }
     public static class MessageKeys
     {

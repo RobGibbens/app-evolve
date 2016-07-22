@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using XamarinEvolve.DataObjects;
 using FormsToolkit;
 using XamarinEvolve.Clients.Portable;
+using XLabs.Platform.Device;
 
 namespace XamarinEvolve.Clients.UI
 {
@@ -14,9 +15,8 @@ namespace XamarinEvolve.Clients.UI
         string filteredCategories;
         ToolbarItem filterItem;
         string loggedIn;
-        public SessionsPage()
+        public SessionsPage(IDevice device)
         {
-           
             InitializeComponent();
             loggedIn = Settings.Current.Email;
             showFavs = Settings.Current.FavoritesOnly;
@@ -61,7 +61,7 @@ namespace XamarinEvolve.Clients.UI
                     if(session == null)
                         return;
                     
-                    var sessionDetails = new SessionDetailsPage(session);
+                    var sessionDetails = new SessionDetailsPage(session, device);
 
                     App.Logger.TrackPage(AppPage.Session.ToString(), session.Title);
                     await NavigationService.PushAsync(Navigation, sessionDetails);
@@ -79,7 +79,9 @@ namespace XamarinEvolve.Clients.UI
        
         protected override void OnAppearing()
         {
-            base.OnAppearing();
+			Xamarin.Insights.Track("SessionsPage");
+
+			base.OnAppearing();
 
             ListViewSessions.ItemTapped += ListViewTapped;
 

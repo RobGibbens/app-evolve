@@ -6,6 +6,9 @@ using XamarinEvolve.DataObjects;
 using System.Windows.Input;
 using Plugin.Share;
 using FormsToolkit;
+using XLabs.Platform.Device;
+using Xamarin;
+using System.Collections.Generic;
 
 namespace XamarinEvolve.Clients.Portable
 {
@@ -18,9 +21,10 @@ namespace XamarinEvolve.Clients.Portable
             set { SetProperty(ref session, value); }
         }
 
-       
-        public SessionDetailsViewModel(INavigation navigation, Session session) : base(navigation)
+		IDevice device;
+        public SessionDetailsViewModel(INavigation navigation, Session session, IDevice device) : base(navigation)
         {
+			this.device = device;
             Session = session;
             if (Session.StartTime.HasValue)
                 ShowReminder = !Session.StartTime.Value.IsTBA();
@@ -127,15 +131,9 @@ namespace XamarinEvolve.Clients.Portable
 
             try 
             {
-                
-
                 IsBusy = true;
-               
-              
                 IsReminderSet = await ReminderService.HasReminderAsync(Session.Id);
                 Session.FeedbackLeft = await StoreManager.FeedbackStore.LeftFeedback(Session);
-
-
             } 
             catch (Exception ex) 
             {
@@ -148,9 +146,6 @@ namespace XamarinEvolve.Clients.Portable
             }
 
         }
-
-       
-
     }
 }
 

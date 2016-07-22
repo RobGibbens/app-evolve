@@ -6,6 +6,7 @@ using FormsToolkit;
 using MvvmHelpers;
 using Xamarin.Forms;
 using Plugin.Share;
+using XLabs.Platform.Device;
 
 namespace XamarinEvolve.Clients.Portable
 {
@@ -20,8 +21,59 @@ namespace XamarinEvolve.Clients.Portable
         MenuItem accountItem;
         MenuItem pushItem;
         IPushNotifications push;
-        public AboutViewModel()
+
+		string deviceName;
+		public string DeviceName
+		{
+			get { return deviceName; }
+			set
+			{
+				deviceName = value;
+				OnPropertyChanged();
+			}
+		}
+
+		string deviceFirmwareVersion;
+		public string DeviceFirmwareVersion
+		{
+			get { return deviceFirmwareVersion; }
+			set
+			{
+				deviceFirmwareVersion = value;
+				OnPropertyChanged();
+			}
+		}
+
+		string deviceHardwareVersion;
+		public string DeviceHardwareVersion
+		{
+			get { return deviceHardwareVersion; }
+			set
+			{
+				deviceHardwareVersion = value;
+				OnPropertyChanged();
+			}
+		}
+
+		string deviceManufacturer;
+		public string DeviceManufacturer
+		{
+			get { return deviceManufacturer; }
+			set
+			{
+				deviceManufacturer = value;
+				OnPropertyChanged();
+			}
+		}
+
+        public AboutViewModel(IDevice device)
         {
+
+			this.DeviceName = device.Name;
+			this.DeviceFirmwareVersion = device.FirmwareVersion;
+			this.DeviceHardwareVersion = device.HardwareVersion;
+			this.DeviceManufacturer = device.Manufacturer;
+
             AboutItems.Clear ();
             AboutItems.Add(new MenuItem { Name = "About this app", Icon = "icon_venue.png" });
             push = DependencyService.Get<IPushNotifications>();

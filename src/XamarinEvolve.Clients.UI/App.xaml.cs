@@ -5,13 +5,14 @@ using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
 using Xamarin.Forms;
 using XamarinEvolve.Clients.Portable;
+using XLabs.Platform.Device;
 
 namespace XamarinEvolve.Clients.UI
 {
     public partial class App : Application
     {
         public static App current;
-        public App()
+        public App(IDevice device)
         {
             current = this;
             InitializeComponent();
@@ -20,14 +21,14 @@ namespace XamarinEvolve.Clients.UI
             switch (Device.OS)
             {
                 case TargetPlatform.Android:
-                    MainPage = new RootPageAndroid();
+                    MainPage = new RootPageAndroid(device);
                     break;
                 case TargetPlatform.iOS:
-                    MainPage = new EvolveNavigationPage(new RootPageiOS());
+                    MainPage = new EvolveNavigationPage(new RootPageiOS(device));
                     break;
                 case TargetPlatform.Windows:
                 case TargetPlatform.WinPhone:
-                    MainPage = new RootPageWindows();
+                    MainPage = new RootPageWindows(device);
                     break;
                 default:
                     throw new NotImplementedException();

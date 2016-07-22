@@ -3,13 +3,14 @@ using XamarinEvolve.Clients.UI;
 using FormsToolkit;
 using XamarinEvolve.Clients.Portable;
 using XamarinEvolve.DataStore.Abstractions;
+using XLabs.Platform.Device;
 
 namespace XamarinEvolve.Clients.UI
 {
     public class RootPageiOS : TabbedPage
     {
 
-        public RootPageiOS()
+        public RootPageiOS(IDevice device)
         {
 
             #if ENABLE_TEST_CLOUD
@@ -23,11 +24,11 @@ namespace XamarinEvolve.Clients.UI
             #endif
 
             NavigationPage.SetHasNavigationBar(this, false);
-            Children.Add(new EvolveNavigationPage(new FeedPage()));
-            Children.Add(new EvolveNavigationPage(new SessionsPage()));
+            Children.Add(new EvolveNavigationPage(new FeedPage(device)));
+            Children.Add(new EvolveNavigationPage(new SessionsPage(device)));
             Children.Add(new EvolveNavigationPage(new EventsPage()));
             Children.Add(new EvolveNavigationPage(new MiniHacksPage()));
-            Children.Add(new EvolveNavigationPage(new AboutPage()));
+            Children.Add(new EvolveNavigationPage(new AboutPage(device)));
 
             MessagingService.Current.Subscribe<DeepLinkPage>("DeepLinkPage", async (m, p) =>
                 {
@@ -51,7 +52,7 @@ namespace XamarinEvolve.Clients.UI
                             var session = await DependencyService.Get<ISessionStore>().GetAppIndexSession (p.Id);
                             if (session == null)
                                 break;
-                            await CurrentPage.Navigation.PushAsync(new SessionDetailsPage(session));
+                            await CurrentPage.Navigation.PushAsync(new SessionDetailsPage(session, device));
                             break;
                     }
 

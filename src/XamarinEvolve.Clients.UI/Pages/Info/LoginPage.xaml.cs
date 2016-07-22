@@ -61,6 +61,13 @@ namespace XamarinEvolve.Clients.UI
                 };
         }
 
+		protected override void OnAppearing()
+		{
+			Xamarin.Insights.Track("LoginPage");
+
+			base.OnAppearing();
+		}
+
         protected override bool OnBackButtonPressed()
         {
             if(Settings.Current.FirstRun)

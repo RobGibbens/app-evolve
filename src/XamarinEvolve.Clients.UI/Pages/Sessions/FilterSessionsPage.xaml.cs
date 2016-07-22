@@ -38,7 +38,12 @@ namespace XamarinEvolve.Clients.UI
             LoadCategories ();
         }
 
+		protected override void OnAppearing()
+		{
+			Xamarin.Insights.Track("FilterSessionsPage");
 
+			base.OnAppearing();
+		}
         void LoadCategories()
         { 
             vm.LoadCategoriesAsync().ContinueWith((result) =>
