@@ -74,6 +74,7 @@ namespace XamarinEvolve.Droid
         GoogleApiClient client;
         protected override void OnCreate (Bundle savedInstanceState)
         {
+			Xamarin.Insights.Initialize(ApiKeys.InsightsKey, this);
             FormsAppCompatActivity.ToolbarResource = Resource.Layout.toolbar;
             FormsAppCompatActivity.TabLayoutResource = Resource.Layout.tabs;
 
