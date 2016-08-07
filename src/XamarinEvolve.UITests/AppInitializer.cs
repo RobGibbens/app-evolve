@@ -8,7 +8,7 @@ namespace XamarinEvolve.UITests
 {
     public class AppInitializer
     {
-        const string apkfile = "../../../XamarinEvolve.Android/bin/UITest/com.sample.evolve-Signed.apk";
+        const string apkfile = @"C:\dev\app-evolve\src\com.sample.evolve.apk";
         //        const string appfile = "../../../XamarinEvolve.iOS/bin/iPhoneSimulator/Debug/XamarinEvolveiOS.app";
 
         private static IApp app;
@@ -28,6 +28,7 @@ namespace XamarinEvolve.UITests
             if (platform == Platform.Android)
             {
                 app = ConfigureApp.Android.ApkFile(apkfile)
+                    .DeviceSerial("169.254.76.233:5555")
                     .StartApp(Xamarin.UITest.Configuration.AppDataMode.Clear);
             }
             else

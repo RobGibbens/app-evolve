@@ -490,9 +490,6 @@
         }
       },
       "NodaTime/1.3.1": {
-        "frameworkAssemblies": [
-          "System.Xml"
-        ],
         "compile": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+XamariniOS1/NodaTime.dll": {}
         },
@@ -2637,9 +2634,6 @@
         }
       },
       "NodaTime/1.3.1": {
-        "frameworkAssemblies": [
-          "System.Xml"
-        ],
         "compile": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+XamariniOS1/NodaTime.dll": {}
         },
@@ -4692,9 +4686,6 @@
         }
       },
       "NodaTime/1.3.1": {
-        "frameworkAssemblies": [
-          "System.Xml"
-        ],
         "compile": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+XamariniOS1/NodaTime.dll": {}
         },
@@ -6716,9 +6707,6 @@
         }
       },
       "NodaTime/1.3.1": {
-        "frameworkAssemblies": [
-          "System.Xml"
-        ],
         "compile": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+XamariniOS1/NodaTime.dll": {}
         },
@@ -8774,9 +8762,6 @@
         }
       },
       "NodaTime/1.3.1": {
-        "frameworkAssemblies": [
-          "System.Xml"
-        ],
         "compile": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+XamariniOS1/NodaTime.dll": {}
         },
@@ -10798,9 +10783,6 @@
         }
       },
       "NodaTime/1.3.1": {
-        "frameworkAssemblies": [
-          "System.Xml"
-        ],
         "compile": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+XamariniOS1/NodaTime.dll": {}
         },
@@ -12856,9 +12838,6 @@
         }
       },
       "NodaTime/1.3.1": {
-        "frameworkAssemblies": [
-          "System.Xml"
-        ],
         "compile": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+XamariniOS1/NodaTime.dll": {}
         },
@@ -14526,8 +14505,9 @@
       ]
     },
     "HockeySDK.UWP/4.0.0": {
-      "sha512": "ByRaD8GrhJvkM+J5k8wvd8aAWoNxTU/eghaBxLbWw/F704X5w9dUKsVYC6CCWriYTAwxWdVQLerq2V6DQUfasw==",
+      "sha512": "8073pxsE36oroVBg8RAUyxd8RSngh3A5n/5Tux+9WPU6vnrQZcroM1rE/E9oa3FpMO0MdZpAqepcIy54fzkbjA==",
       "type": "package",
+      "path": "HockeySDK.UWP/4.0.0",
       "files": [
         "HockeySDK.UWP.4.0.0.nupkg.sha512",
         "HockeySDK.UWP.nuspec",
@@ -18758,12 +18738,12 @@
       ]
     },
     "Xam.Plugins.Messaging/3.2.1": {
-      "sha512": "Aq4dgXK4xNFLo+BG3T+oV/bjdUnpE5vt+hVFdABUIBDUhk3JHjrDAkeT+7OSZZRIcma1uCEb80A3tqAM7ceK/g==",
-      "type": "Package",
+      "sha512": "9WPIzUoTy1sDh/R88aPgtxzFGdhtuxuR5EbYQrpbOv5ddMmQqS94vZSXkvn9mqIIqJ366BgI53sE8aJ87dcUtQ==",
+      "type": "package",
+      "path": "Xam.Plugins.Messaging/3.2.1",
       "files": [
+        "Xam.Plugins.Messaging.3.2.1.nupkg.sha512",
         "Xam.Plugins.Messaging.nuspec",
-        "[Content_Types].xml",
-        "_rels/.rels",
         "lib/MonoAndroid10/Plugin.Messaging.Abstractions.dll",
         "lib/MonoAndroid10/Plugin.Messaging.Abstractions.pdb",
         "lib/MonoAndroid10/Plugin.Messaging.Abstractions.xml",
@@ -18807,8 +18787,7 @@
         "lib/wpa81/Plugin.Messaging.Abstractions.xml",
         "lib/wpa81/Plugin.Messaging.dll",
         "lib/wpa81/Plugin.Messaging.pdb",
-        "lib/wpa81/Plugin.Messaging.xml",
-        "package/services/metadata/core-properties/755d29c23d934733a55ccf2533d52822.psmdcp"
+        "lib/wpa81/Plugin.Messaging.xml"
       ]
     },
     "Xam.Plugins.Settings/2.1.0": {
@@ -18868,12 +18847,12 @@
       ]
     },
     "Xamarin.Forms/2.3.0.34-pre1": {
-      "sha512": "yzRfz8GvpB/fzuwq1EIaeKMi49JpmHrnFwrcdPp+m6r6wCkU7F/hU35dEx3iEo5xZAElzBDm0uaQeAyFkhFLDg==",
-      "type": "Package",
+      "sha512": "srH8KJO4AleL8v9dgLVAZ29AC2Wqm1gYqFjKm37wQxldszLwzXNnbtx+v2qscvcrlsP4i6NaTJO4ET0j0Hj8LA==",
+      "type": "package",
+      "path": "Xamarin.Forms/2.3.0.34-pre1",
       "files": [
+        "Xamarin.Forms.2.3.0.34-pre1.nupkg.sha512",
         "Xamarin.Forms.nuspec",
-        "[Content_Types].xml",
-        "_rels/.rels",
         "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/ICSharpCode.Decompiler.dll",
         "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/ICSharpCode.NRefactory.CSharp.dll",
         "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/ICSharpCode.NRefactory.Cecil.dll",
@@ -19060,8 +19039,7 @@
         "lib/wpa81/Xamarin.Forms.Platform.WinRT/Xamarin.Forms.Platform.WinRT.xr.xml",
         "lib/wpa81/Xamarin.Forms.Platform.dll",
         "lib/wpa81/Xamarin.Forms.Xaml.dll",
-        "lib/wpa81/Xamarin.Forms.Xaml.xml",
-        "package/services/metadata/core-properties/d5559c8a6f694cc3a663b0cf99e8f501.psmdcp"
+        "lib/wpa81/Xamarin.Forms.Xaml.xml"
       ]
     },
     "Xamarin.Forms.Maps/2.3.0.34-pre1": {

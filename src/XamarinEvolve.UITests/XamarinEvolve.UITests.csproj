@@ -67,18 +67,12 @@
     <Compile Include="Pages\Sessions\SessionsPage.cs" />
     <Compile Include="Pages\Speakers\SpeakerDetailsPage.cs" />
     <Compile Include="Pages\AboutPage.cs" />
-    <Compile Include="Tests\EventsTests.cs" />
     <Compile Include="Tests\SessionsTests.cs" />
     <Compile Include="Pages\Sponsors\SponsorsPage.cs" />
     <Compile Include="Pages\Sponsors\SponsorDetailsPage.cs" />
-    <Compile Include="Tests\FeedTests.cs" />
-    <Compile Include="Tests\LoginTests.cs" />
     <Compile Include="Pages\Home\FeedPage.cs" />
     <Compile Include="Pages\Home\NotificationsPage.cs" />
     <Compile Include="Pages\Info\InfoPage.cs" />
-    <Compile Include="Tests\SpeakerTests.cs" />
-    <Compile Include="Tests\InfoTests.cs" />
-    <Compile Include="Tests\MiniHacksTests.cs" />
     <Compile Include="Pages\MiniHacks\MiniHackDetailsPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -86,19 +80,13 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XamarinEvolve.Android\XamarinEvolve.Android.csproj">
-      <Project>{C4B4592F-6AC4-4FE6-B63E-5D2DE47FD340}</Project>
+      <Project>{c4b4592f-6ac4-4fe6-b63e-5d2de47fd340}</Project>
       <Name>XamarinEvolve.Android</Name>
-      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\XamarinEvolve.iOS\XamarinEvolve.iOS.csproj">
-      <Project>{22F77CDE-8816-45D7-A7A1-CA9282145F0A}</Project>
-      <Name>XamarinEvolve.iOS</Name>
-      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
-      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
 </Project>

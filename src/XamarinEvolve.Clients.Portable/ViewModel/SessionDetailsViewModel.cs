@@ -25,6 +25,9 @@ namespace XamarinEvolve.Clients.Portable
         public SessionDetailsViewModel(INavigation navigation, Session session, IDevice device) : base(navigation)
         {
 			this.device = device;
+                Xamarin.Insights.Track($"DEVICE NAME:{device.Name}");
+            Xamarin.Insights.Track($"FIRMWARE:{device.FirmwareVersion}");
+
             Session = session;
             if (Session.StartTime.HasValue)
                 ShowReminder = !Session.StartTime.Value.IsTBA();

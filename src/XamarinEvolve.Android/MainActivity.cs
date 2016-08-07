@@ -84,7 +84,7 @@ namespace XamarinEvolve.Droid
             FormsMaps.Init(this, savedInstanceState);
             AndroidAppLinks.Init(this);
             Toolkit.Init ();
-
+            Insights.ForceDataTransmission = true;
             //ZXing.Net.Mobile.Forms.Android.Platform.Init ();
             PullToRefreshLayoutRenderer.Init ();
             typeof (Color).GetProperty ("Accent", BindingFlags.Public | BindingFlags.Static).SetValue (null, Color.FromHex ("#757575"));
@@ -104,8 +104,10 @@ namespace XamarinEvolve.Droid
 #if !ENABLE_TEST_CLOUD
             InitializeHockeyApp ();
 #endif
-
-            LoadApplication (new App (XLabs.Platform.Device.AndroidDevice.CurrentDevice));
+            var device = XLabs.Platform.Device.AndroidDevice.CurrentDevice;
+            Android.Util.Log.Warn("EVOLVE", $"DEVICE NAME:{device.Name}");
+            Android.Util.Log.Warn("EVOLVE", $"FIRMWARE:{device.FirmwareVersion}");
+            LoadApplication(new App (device));
 
             var gpsAvailable = IsPlayServicesAvailable ();
             Settings.Current.PushNotificationsEnabled = gpsAvailable;

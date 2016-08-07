@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using XamarinEvolve.DataObjects;
 using XamarinEvolve.Clients.Portable;
 using FormsToolkit;
+using Xamarin;
 using XLabs.Platform.Device;
 
 namespace XamarinEvolve.Clients.UI
@@ -18,19 +19,21 @@ namespace XamarinEvolve.Clients.UI
             InitializeComponent();
 
 
-            FavoriteButtonAndroid.Clicked += (sender, e) => {
-                Device.BeginInvokeOnMainThread (() => FavoriteIconAndroid.Grow ());
+            FavoriteButtonAndroid.Clicked += (sender, e) =>
+            {
+                Device.BeginInvokeOnMainThread(() => FavoriteIconAndroid.Grow());
             };
-            FavoriteButtoniOS.Clicked += (sender, e) => {
-                Device.BeginInvokeOnMainThread (() => FavoriteIconiOS.Grow ());
+            FavoriteButtoniOS.Clicked += (sender, e) =>
+            {
+                Device.BeginInvokeOnMainThread(() => FavoriteIconiOS.Grow());
             };
 
-            ListViewSpeakers.ItemSelected += async (sender, e) => 
+            ListViewSpeakers.ItemSelected += async (sender, e) =>
                 {
                     var speaker = ListViewSpeakers.SelectedItem as Speaker;
-                    if(speaker == null)
+                    if (speaker == null)
                         return;
-                    
+
                     var speakerDetails = new SpeakerDetailsPage(vm.Session.Id, device);
 
                     speakerDetails.Speaker = speaker;
@@ -40,42 +43,46 @@ namespace XamarinEvolve.Clients.UI
                 };
 
 
-			ButtonRate.Clicked += async (sender, e) =>
-			{
-				var title = this.ViewModel?.Session?.Title;
-				Xamarin.Insights.Track("Rate Session", "SessionTitle", title);
+            ButtonRate.Clicked += async (sender, e) =>
+            {
+                var title = this.ViewModel?.Session?.Title;
+                Xamarin.Insights.Track("Rate Session", "SessionTitle", title);
 
-				if (DemoHelper.ShouldThrowException 
-				    //&& (device.Name == "iPhone 5S GSM" || device.Name == "iPhone 6") 
-				    //&& device.FirmwareVersion == "9.3"
-				   )
-				{
-					try
-					{
-						throw new NotSupportedException();
-					}
-					catch (Exception ex)
-					{
-						Xamarin.Insights.Report(ex);
-						throw;
-					}
-
-				}
-
-                    if(!Settings.Current.IsLoggedIn)
+                if (DemoHelper.ShouldThrowException
+                    && (device.Name == "Nexus 5")
+                    && device.FirmwareVersion == "6.0.1"
+                   )
+                {
+                    try
                     {
-                        DependencyService.Get<ILogger>().TrackPage(AppPage.Login.ToString(), "Feedback");
-                        MessagingService.Current.SendMessage(MessageKeys.NavigateLogin);
-                        return;
+                        throw new NotSupportedException();
                     }
-                    await NavigationService.PushModalAsync(Navigation, new EvolveNavigationPage(new FeedbackPage(ViewModel.Session)));
+                    catch (Exception ex)
+                    {
+                        
+                        Xamarin.Insights.Report(ex, Insights.Severity.Critical);
+                        await Xamarin.Insights.PurgePendingCrashReports();
+                        await Task.Delay(10000);
+                        throw;
+                    }
+                    //throw new NotSupportedException("Second exception");
+
+                }
+
+                if (!Settings.Current.IsLoggedIn)
+                {
+                    DependencyService.Get<ILogger>().TrackPage(AppPage.Login.ToString(), "Feedback");
+                    MessagingService.Current.SendMessage(MessageKeys.NavigateLogin);
+                    return;
+                }
+                await NavigationService.PushModalAsync(Navigation, new EvolveNavigationPage(new FeedbackPage(ViewModel.Session)));
             };
-            BindingContext = new SessionDetailsViewModel(Navigation, session, device); 
+            BindingContext = new SessionDetailsViewModel(Navigation, session, device);
             ViewModel.LoadSessionCommand.Execute(null);
 
         }
 
-        void ListViewTapped (object sender, ItemTappedEventArgs e)
+        void ListViewTapped(object sender, ItemTappedEventArgs e)
         {
             var list = sender as ListView;
             if (list == null)
@@ -83,9 +90,9 @@ namespace XamarinEvolve.Clients.UI
             list.SelectedItem = null;
         }
 
-           
 
-        void MainScroll_Scrolled (object sender, ScrolledEventArgs e)
+
+        void MainScroll_Scrolled(object sender, ScrolledEventArgs e)
         {
             if (e.ScrollY > SessionDate.Y)
                 Title = ViewModel.Session.ShortTitle;
@@ -95,19 +102,19 @@ namespace XamarinEvolve.Clients.UI
 
         protected override void OnAppearing()
         {
-			var title = this.ViewModel?.Session?.Title;
-			Xamarin.Insights.Track("SessionDetailsPage", new Dictionary<string, string> {
-				{"SessionTitle", title }
-			});
+            var title = this.ViewModel?.Session?.Title;
+            Xamarin.Insights.Track("SessionDetailsPage", new Dictionary<string, string> {
+                {"SessionTitle", title }
+            });
 
-			base.OnAppearing();
+            base.OnAppearing();
             MainScroll.Scrolled += MainScroll_Scrolled;
             ListViewSpeakers.ItemTapped += ListViewTapped;
 
 
             var count = ViewModel?.Session?.Speakers?.Count ?? 0;
             var adjust = Device.OS != TargetPlatform.Android ? 1 : -count + 1;
-            if((ViewModel?.Session?.Speakers?.Count ?? 0) > 0)
+            if ((ViewModel?.Session?.Speakers?.Count ?? 0) > 0)
                 ListViewSpeakers.HeightRequest = (count * ListViewSpeakers.RowHeight) - adjust;
 
         }
@@ -119,7 +126,7 @@ namespace XamarinEvolve.Clients.UI
             ListViewSpeakers.ItemTapped -= ListViewTapped;
         }
 
-        protected override  void OnBindingContextChanged()
+        protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
             vm = null;
